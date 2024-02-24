@@ -57,7 +57,7 @@
 
 .roll-btn {
 	height: 2.75rem;
-	width: 9rem;
+	width: 12rem;
 	border-radius: 4px;
 	background-color: #5035ff;
 	color: #fff;
@@ -69,7 +69,29 @@
 	cursor: pointer;
 }
 
+.reset-btn {
+	height: 1.5rem;
+	width: 8rem;
+	border-radius: 4px;
+	background-color: #ff9a35;
+	color: #fff;
+	font-size: 0.75rem;
+	font-weight: 700;
+	text-align: center;
+	outline: none;
+	border: none;
+	cursor: pointer;
+	white-space: nowrap;
+}
+
 .best-score {
+	font-size: 16px;
+	text-align: center;
+	color: #00ff00;
+	margin-bottom: 1rem;
+}
+
+.current-score {
 	font-size: 16px;
 	text-align: center;
 	color: #ff0000;

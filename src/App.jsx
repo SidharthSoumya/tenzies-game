@@ -12,6 +12,7 @@ function App() {
 		startTime: 0,
 	})
 	const [bestScore, setBestScore] = useState(getBestScore())
+	const [currentScore, setCurrentScore] = useState(0)
 
 	useEffect(() => {
 		const allHeld = dice.every(die => die.isHeld)
@@ -26,6 +27,7 @@ function App() {
 		if (tenzies) {
 			setReadyToStart(true)
 			const newScore = (new Date().getTime() - score.startTime) / 1000
+			setCurrentScore(newScore);
 			const scores = JSON.parse(localStorage.getItem("scores")) || []
 			scores.push(newScore)
 			localStorage.setItem("scores", JSON.stringify(scores))
@@ -84,12 +86,19 @@ function App() {
 		}))
 	}
 
+	function handleResetClick() {
+		localStorage.setItem("scores", JSON.stringify([]));
+		setBestScore(getBestScore())
+	}
+
 	const diceElements = dice.map(die => <Die key={die.id} id={die.id} toggleHold={() => toggleHold(die.id)} isHeld={die.isHeld} value={die.value} />)
 
 	return (
 		<main className="tenzie-board">
 			{tenzies && <Confetti />}
-			<h2 className="best-score">Best Score : {bestScore} </h2>
+			{bestScore !== 0 && <h2 className="best-score">Best Score : {bestScore} </h2>}
+			{tenzies && <h2 className="current-score">New Score : {currentScore} </h2>}
+			{ bestScore !== 0 && <button onClick={handleResetClick} className="reset-btn">Reset Scores</button>}
 			<h1 className="title">Tenzies</h1>
 			<p className="instructions">
 				Roll until all dice are the same. Click each die to freeze it at its current value between rolls.
